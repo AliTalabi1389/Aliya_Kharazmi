@@ -36,6 +36,7 @@ how_to_play_but = Actor("how_to_play_but1")
 help_game = Actor("help_game1")
 play_again_but = Actor("play_again_but1")
 main_menu_but = Actor("main_menu_but1")
+hero_hitbox = Actor("hero_hitbox")
 
 laser_guns = []
 lasers = []
@@ -54,6 +55,7 @@ for i in range(3):
 bg1.pos = WIDTH // 2, HEIGHT // 2
 bg2.pos = WIDTH + WIDTH // 2, HEIGHT // 2
 hero.pos = 50, HEIGHT // 2
+hero_hitbox.pos = hero.pos
 show_health.pos = 900, 12.5
 moving_spike1.pos = 957, random.randint(101, 399)
 moving_spike2.pos = 1157, random.randint(101, 399)
@@ -228,6 +230,7 @@ def draw():
         spike_wall1.draw()
         show_health.draw()
         hero.draw()
+        hero_hitbox.draw()
         pause_but.draw()
         resume_but.draw()
         pause_but.pos = 25, 25
@@ -266,6 +269,8 @@ def update():
         spike_wall_speed_y, moving_spike_speed_x, moving_spike_speed_y, show_health_image_num, bgs_speed, \
         music_play, change_music_form_time, laser_guns_come_time, laser_off_time, \
         laser_shooting_time, laser_gun_come_3, change_music_form_bool, win_timer, timer_in_screen
+
+    hero_hitbox.pos = hero.pos
 
     if game_status == "play":
         bg1.x -= bgs_speed
@@ -501,10 +506,10 @@ def update():
             laser_off_time = 2000
 
         if hero_status == "normal":
-            if hero.colliderect(moving_spike1) or hero.colliderect(moving_spike2) or hero.colliderect(moving_spike3) \
-                    or hero.colliderect(moving_spike4) or hero.colliderect(moving_spike5) \
-                    or hero.colliderect(moving_spike6) or hero.colliderect(spike_wall1) \
-                    or hero.collidelist(lasers) != -1 or hero.y <= 100 or hero.y >= 400:
+            if hero_hitbox.colliderect(moving_spike1) or hero_hitbox.colliderect(moving_spike2) or hero_hitbox.colliderect(moving_spike3) \
+                    or hero_hitbox.colliderect(moving_spike4) or hero_hitbox.colliderect(moving_spike5) \
+                    or hero_hitbox.colliderect(moving_spike6) or hero_hitbox.colliderect(spike_wall1) \
+                    or hero_hitbox.collidelist(lasers) != -1 or hero_hitbox.y <= 100 or hero_hitbox.y >= 400:
                 hero_status = "invincible"
                 hero.image = "hero_damage"
                 clock.schedule(image_change_normal, 2.5)
@@ -603,6 +608,7 @@ def on_mouse_up(pos):
         bg1.pos = WIDTH // 2, HEIGHT // 2
         bg2.pos = WIDTH + WIDTH // 2, HEIGHT // 2
         hero.pos = 50, HEIGHT // 2
+        hero_hitbox.pos = hero.pos
         show_health.pos = 900, 12.5
         moving_spike1.x = 957
         moving_spike2.x = 1157
@@ -692,6 +698,7 @@ def on_mouse_up(pos):
         bg1.pos = WIDTH // 2, HEIGHT // 2
         bg2.pos = WIDTH + WIDTH // 2, HEIGHT // 2
         hero.pos = 50, HEIGHT // 2
+        hero_hitbox.pos = hero.pos
         show_health.pos = 900, 12.5
         moving_spike1.pos = 957, random.randint(101, 399)
         moving_spike2.pos = 1157, random.randint(101, 399)

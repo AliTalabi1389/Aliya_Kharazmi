@@ -5,3 +5,5 @@
 This game is about a character who has to pass obstacles such as rotating blades, walls with blades and lasers and survive for 63 seconds.
 
   * The rest of the explanation is in the " **Help Game** " section .
+
+**Code By ***Ali Talabi*****
